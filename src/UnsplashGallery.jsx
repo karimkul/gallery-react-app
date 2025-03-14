@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ImageDetailsPopup from "./ImageDetailsPopup"; // Import the new component
+import ImageDetailsPopup from "./ImageDetailsPopup";
 
 const GalleryContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     padding: 10px;
+`;
+
+const StyledImg = styled.img`
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
 `;
 
 function UnsplashGallery() {
@@ -74,24 +82,21 @@ function UnsplashGallery() {
             <GalleryContainer>
                 {images.map((image, index) => (
                     <div key={index}>
-                        <img
+                        <StyledImg
                             src={image.src}
                             alt={`Image ${index}`}
                             onClick={() => handleImageClick(image)}
-                            style={{
-                                width: "100%",
-                                height: "200px",
-                                objectFit: "cover",
-                                borderRadius: "8px",
-                                cursor: "pointer"
-                            }}
                         />
                         <p>{image.description}</p>
                     </div>
                 ))}
             </GalleryContainer>
 
-            <ImageDetailsPopup image={selectedImage} onClose={closeModal} />
+            <ImageDetailsPopup
+                image={selectedImage}
+                onClose={closeModal}
+                StyledImg={StyledImg}
+            />
         </div>
     );
 }

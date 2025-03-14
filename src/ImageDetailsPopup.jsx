@@ -26,6 +26,7 @@ const ModalContent = styled.div`
 const CloseButton = styled.button`
     padding: 8px 16px;
     margin-top: 20px;
+    margin-left: 10px;
     background-color: #ff4c4c;
     color: white;
     border: none;
@@ -33,22 +34,21 @@ const CloseButton = styled.button`
     cursor: pointer;
 `;
 
+const PopupImg = styled.img`
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+`;
+
 function ImageDetailsPopup({ image, onClose }) {
     if (!image) return null;
 
     return (
         <Modal onClick={onClose}>
-            <ModalContent onClick={(e) => e.stopPropagation()}>
-                <img
-                    src={image.src}
-                    alt="Selected"
-                    style={{
-                        width: "100%",
-                        height: "auto",
-                        objectFit: "cover",
-                        borderRadius: "8px"
-                    }}
-                />
+            <ModalContent>
+                <PopupImg src={image.src} alt="Selected" />
+
                 <p>{image.description}</p>
                 <a href={image.link} target="_blank" rel="noopener noreferrer">
                     View more
